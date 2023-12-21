@@ -67,6 +67,7 @@ namespace _532168459
     {
         private static void Postfix(ref bool __result, AchievementEntity __instance)
         {
+            if (!Main.Enabled) return;
             if (!__instance.Data.OnlyMainCampaign && Game.Instance.Player.Campaign && !Game.Instance.Player.Campaign.IsMainGameContent)
             {
                 __result = true;
@@ -83,6 +84,7 @@ namespace _532168459
     {
         public static void Postfix(ref bool __result)
         {
+            if (!Main.Enabled) return;
             __result = false;
             return;
         }
@@ -93,6 +95,7 @@ namespace _532168459
     {
         public static void Postfix(ref int __result)
         {
+            if (!Main.Enabled) return;
             __result = 0;
             return;
         }
@@ -104,6 +107,7 @@ namespace _532168459
         //Postfix must be spelt correctly to be applied
         static void Postfix(ref int __result)
         {
+            if (!Main.Enabled) return;
             // Harmony parameters are determined by name, __result 
             // is the current cost of the mercenary. Because it is a 
             // ref parameter, we can modify it's value
@@ -121,7 +125,7 @@ namespace _532168459
         [HarmonyPrefix]
         private static bool ShowUserInputLayer(LoadingScreenBaseView __instance, bool state)
         {
-            if (!Main.Enabled) return false;
+            if (!Main.Enabled) return true;
             if (!state)
                 return false;
             __instance.m_ProgressBarContainer.DOFade(0.0f, 1f).OnComplete(() => __instance.StartPressAnyKeyLoopAnimation()).SetUpdate(true);
